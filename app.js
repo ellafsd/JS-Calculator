@@ -24,7 +24,7 @@
      output.style.lineHeight = '50px';
      output.style.fontSize = '3rem';
      output.style.textAlign = 'right';
-     container.appendChild(output);
+      container.appendChild(output);
      const main = document.createElement('div');  //setup another container object
      main.classList.add('main');
      main.style.width = '100%';
@@ -33,9 +33,8 @@
          //console.log(val);
          btnMaker(val,addOutput);
      })
-
     btnMaker('=',evaluationOutput);  //Creating = button to evaluate the output
-    btnMaker('C',clearOutput)    //Clear Output
+    btnMaker('C',clearOutput);    //Clear Output
 
 
      function cOutput(v){    //helps with any error
@@ -54,7 +53,7 @@
          }else {
             try {
                 var result = eval(output.value);  //eval function in JS that evaluates JS code represented as a string and executes it. 
-                output.value = result;  //Update the output with the result
+                output.value = Number(result).toFixed(4);  //Update the output with the result and round decimal parts to 4 digit
                 decimal = result.toString().includes('.'); // Update the decimal flag based on the result
             } catch (e) {
                 // If there's an error during evaluation, display an error message
@@ -73,7 +72,6 @@
      }
 
 
-
      function btnMaker(txt, myFunction){
          let btn = document.createElement('button');
          btn.setAttribute('type', 'button');
@@ -88,15 +86,11 @@
      }
 
 
-
      function addOutput(e){  //handle the button when it gets clicked 
          console.log(decimal);
-         cOutput('black');  //user clicked = before entering any valur border will turn to red then with this line of code after they start enter input border will turn to black again
-         //console.log(e.target.val);  //whenever key is pressed after press I get a string value from the key
+         cOutput('black');  //If user clicks = before entering any value, border will turn to red. Then after they start entering input, border will turn to black again
          let char = e.target.value;
-         //output.value += char;    //setting the value of output and sending the value of output in whatever the value of the character that's been pressed
-        
-        if(char == '.'){    //user will not enter more than 1 decimal like 4.4.4
+         if(char == '.'){    //user will not enter more than 1 decimal like 4.4.4
              if(decimal){
                  char ='';
                  cOutput('red');
